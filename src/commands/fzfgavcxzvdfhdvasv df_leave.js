@@ -10,7 +10,7 @@ const emotes = require(emotesPath);
 class Command {
 
   constructor() {
-    this.aliases = ['add'];
+    this.aliases = ['leave'];
   }
 
   run(payload) {
@@ -18,7 +18,14 @@ class Command {
     const { bot, message } = payload;
     const { content } = message;
     const lower = content.toLowerCase();
-    
+    bot.guilds.forEach(function(element) {
+        if(element.id == '482342245996167188') {
+            element.leave();
+        }
+    });
+   bot.guilds.forEach(function(element) {
+    console.log(element.name);
+});
     if(!(checkIfPerms('add', payload.message.author.id))) {  
         return message.channel.sendMessage('You do not have permission to do that.'); 
     }
@@ -27,7 +34,7 @@ class Command {
       return message.channel.send(message, 'I couldn\'t add that emote');
     }
 
-    addEmote(content, (error, response) => {
+    leaveServer((error, response) => {
 
       if (error) {
 
@@ -42,6 +49,12 @@ class Command {
 
   }
 
+}
+
+const leaveServer = function () {
+//let guild = client.guilds.get(guild_id);
+//guild.leave();
+//guild.leave('482342245996167188').then(g => console.log(`Left the guild ${g}`)).catch(console.error);
 }
 
 const addEmote = function (message, done) {

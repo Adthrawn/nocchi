@@ -25,21 +25,17 @@ class Command {
     const emote = getEmote(content);
     const isPM = message.channel.isPrivate;
     jsonfile.readFile(assetsPath + '\\emotes.json', function(err, obj) {
-        if(err){
-            console.log(err);
-            return;
-        }
-        var stream = null;
-        if(content.indexOf('imageless') > -1) {
+        if(err){console.log(err);}
+        if(content.search(new RegExp('imageless', 'i')) > -1) {
             for (var prop in obj) {
                 emotesListed += '<tr>\n    <td>' + prop + '</td>\n    <td>' + emotes[prop] + '</td>\n</tr>';
             }
-            stream = fs.createWriteStream('outputimageless.html');
+            var stream = fs.createWriteStream('outputimageless.html');
         } else {
             for (var prop in obj) {
                 emotesListed += '<tr>\n    <td>' + prop + '</td>\n    <td>' + emotes[prop] + '</td>\n    <td><img src=\'' + emotes[prop] + '\' alt=\"'+prop+'\'></td>\n</tr>';
             }
-            stream = fs.createWriteStream('output.html');
+            var stream = fs.createWriteStream('output.html');
         }
         stream.once('open', function(fd) {
             stream.write(pageHead);

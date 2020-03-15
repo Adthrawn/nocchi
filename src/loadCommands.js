@@ -29,4 +29,5 @@ files.forEach(file => {
 
 });
 
+console.log(commands);
 export default commands;

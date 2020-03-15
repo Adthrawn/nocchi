@@ -1,5 +1,5 @@
 import path from 'path';
-import { getEmote } from '../util';
+import { getEmote, playSound } from '../util';
 import Discord from 'discord.js';
 
 const assetsPath = path.join(__dirname, '../../assets');
@@ -23,11 +23,16 @@ class Command {
     const isPM = message.channel.isPrivate;
 
     if (emotes.hasOwnProperty(emote)) {
-      bot.sendMessage(message, emotes[emote]);
+    message.channel.send(emotes[emote]);
+    //if(emotes[emote].substring(emotes[emote].length-5) == ".gifv") {
+    //     message.channel.send("<"+emotes[emote]+">", {"embed": { "image": {"url": emotes[emote].substring(0, emotes[emote].length-1),} } });
+    // } else {
+    //     message.channel.send("<"+emotes[emote]+">", {"embed": { "image": {"url": emotes[emote],} } });
+    // }
     }
 
     if (!isPM && audioEmotes.hasOwnProperty(emote)) {
-      bot.voiceConnection.playFile(`${audioPath}${audioEmotes[emote]}`);
+        playSound(payload.voiceConnection, `${audioPath}${audioEmotes[emote]}`);
     }
 
   }

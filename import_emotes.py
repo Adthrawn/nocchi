@@ -7,6 +7,7 @@ def import_emotes(argv):
   Imports an cytube emote export json, parses it and stores it inside emotes.json
   :param argv: Name of the to be imported json
   """
+
   in_file = argv[0]
   parsed = {}
 
@@ -14,7 +15,7 @@ def import_emotes(argv):
     emotes = json.load(raw)
 
     for e in emotes:
-      parsed[e["name"].lower()] = "http:" + e["image"]
+      parsed[e["name"]] = e["image"]
 
     with open('emotes.json', 'w') as out_file:
       json.dump(parsed, out_file)

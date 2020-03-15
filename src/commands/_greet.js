@@ -1,4 +1,5 @@
 import path from 'path';
+import { playSound } from '../util';
 import config from '../../config';
 
 const assetsPath = path.join(__dirname, '../../assets');
@@ -14,15 +15,17 @@ class Command {
 
   run(payload) {
 
-    const { bot, message, channels: { textChannel, voiceChannel } } = payload;
+    const { bot, message, channels: { textChannel, voiceChannel }, voiceConnection } = payload;
     const { botname } = config;
 
     const isPM = message.channel.isPrivate;
 
-    bot.sendMessage(message, `${botname} desu.`);
+    //message.channel.send(`${botname} desu.`);
+	//message.channel.send('watashi no namae wa, kashiyuka desu')
+    message.channel.send('/yukadesu watashi no namae wa, kashiyuka desu')
 
     if (!isPM) {
-      bot.voiceConnection.playFile(`${audioPath}${audioEmotes['nocchi']}`);
+      playSound(payload.voiceConnection, `${audioPath}${audioEmotes['nocchi']}`);
     }
 
   }
