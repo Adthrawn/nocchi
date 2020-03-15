@@ -1,9 +1,13 @@
 module.exports = {
   debug: false,
+  //name of the bot
   botname: 'yuka',
+  //owner
   owner: 'Adthrawn',
-  discordToken: 'Bot NTI2MTYyOTUwOTEwOTAyMjcy.DwBL_g._N7eXnV67aQbZOIbq9LNmj0OFRk',
-  wolframToken: 'JVW96G-3AYVWE3T4V',
+  //discord token here
+  discordToken: '',
+  //wolfram token here
+  wolframToken: '',
   twitter: {
    access_token: '<access_token>',
    access_token_secret: '<access_token_secret>',
